@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Ifood Entregador</title>
+    <style>
+        #chat-box {
+            height: 150px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 0px;
+        }
+        .user-message {
+            background-color: #ff0800;
+            padding: 2px 5px;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .bot-message {
+            background-color: #0080CD;
+            padding: 2px 5px;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .ifood {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+            background-color: #ff0800;
+        }
+        .logo {
+            width: 80px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ifood">
+        <img class="logo" src="./img/logo-ifood.png" alt="Logo iFood">
+    </div>
+
+    <div id="chat-box"></div>
+
+    <script>
+        // Função para enviar uma mensagem do suporte
+        function sendBotMessage(message) {
+            var chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += "<p><strong class='bot-message'>Suporte:</strong> " + message + "</p>";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Função inicio do chat
+        function startChat() {
+            var messages = [
+                "Estou com um problema!<br>   Meu pneu furou."
+            ];
+
+            var responses = [
+                "Olá! Eu sou Scooby e estou aqui para ajudar. Lamento pelo ocorrido!<br> Nesse caso, fique onde está. Vou abrir uma rota de SOCORRO onde um entregador irá até você para pegar a mercadoria e entregar até o cliente.<br> fique tranquilo, você receberá pelo deslocamento e isso não afetará seu score.",
+            ];
+
+
+            var chatBox = document.getElementById("chat-box");
+
+            // Exibe a conversa
+            for (var i = 0; i < messages.length; i++) {
+                // Exibe a mensagem do entregador
+                chatBox.innerHTML += "<p><strong class='user-message'>Você:</strong> " + messages[i] + "</p>";
+
+                // Exibindo resposta do bot logo após
+                setTimeout((function(index) {
+                    return function() {
+                        sendBotMessage(responses[index]);
+                    };
+                })(i), (i + 1) * 2500); 
+            }
+        }
+
+        window.onload = startChat;
+    </script>
+</body>
+</html>
